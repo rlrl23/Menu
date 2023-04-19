@@ -1,0 +1,14 @@
+<ul class="tree">
+    {% with items=menu %}
+    {% for item in items %}
+    <li style="list-style-type: none;" >
+       <details {% if item.id in context.open_items %}open {% endif %}>
+            <summary><a style="text-decoration: none; color: black; {% if item.url in context.request.path %}font-weight: bold;{% endif %}" href="{{item.url}}">{{ item.name}}</a></summary>
+    {% if item.children %}
+    {% include 'menu.html' with menu=item.children %}
+    {% endif %}
+        </details>
+     </li>
+        {% endfor %}
+    {% endwith%}
+</ul >
